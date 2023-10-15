@@ -2,10 +2,7 @@ package controller;
 
 import model.Empleado;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import service.EmpleadoService;
 
 @RestController
@@ -18,23 +15,23 @@ public class EmpleadoController {
     public EmpleadoController(EmpleadoService empleadoService) {
         this.empleadoService = empleadoService;
     }
-
+    @GetMapping
     public Empleado getAllEmpleados(@PathVariable Integer id){
         return (Empleado) empleadoService.getAllEmpleados();
     }
-
+    @GetMapping("/{id}")
     public Empleado getEmpleadoById(@PathVariable Integer id){
         return empleadoService.getEmpleadoById(id);
     }
-
+    @PostMapping
     public Empleado addEmpleado(@RequestBody Empleado empleado){
         return empleadoService.addEmpleado(empleado);
     }
-
+    @PutMapping("/{id}")
     public Empleado updateEmpleado(@PathVariable Integer id, @RequestBody Empleado empleado){
         return empleadoService.updateEmpleado(id, empleado);
     }
-
+    @DeleteMapping("/{id}")
     public  void deleteEmpleado(@PathVariable Integer id){
         empleadoService.deleteEmpleado(id);
     }
