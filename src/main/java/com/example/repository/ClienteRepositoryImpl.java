@@ -1,37 +1,33 @@
-package service;
+package com.example.repository;
 
-import model.Cliente;
+import com.example.model.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import repository.ClienteRepository;
+import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class ClienteService implements IClienteService {
+@Repository
+public class ClienteRepositoryImpl implements IClientRepository {
 
-    private final ClienteRepository clienteRepository;
-
-    /*private List<Cliente> clientes = new ArrayList<>();
-    private Integer nextId = 1;*/
+    private ClienteRepository clienteRepository;
 
     @Autowired
-    public ClienteService(ClienteRepository clienteRepository) {
+    public ClienteRepositoryImpl(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
     }
+
 
     @Override
     public List<Cliente> getAllClientes() {
         return clienteRepository.findAll();
     }
 
+
     @Override
-    public Cliente getClienteById(Integer id) {
-        Optional<Cliente> cliente = clienteRepository.findById(id);
-        return cliente.orElse(null);
+    public Cliente findClienteById(Integer id) {
+        Optional<Cliente> client = clienteRepository.findById(id);
+        return client.orElse(null);
     }
 
     @Override
@@ -50,8 +46,7 @@ public class ClienteService implements IClienteService {
 
     @Override
     public void deleteCliente(Integer id) {
-      clienteRepository.deleteById(id);
+        clienteRepository.deleteById(id);
 
     }
-
 }

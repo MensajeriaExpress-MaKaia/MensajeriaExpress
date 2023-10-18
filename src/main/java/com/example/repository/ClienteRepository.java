@@ -1,9 +1,8 @@
-package repository;
+package com.example.repository;
 
-import model.Cliente;
+import com.example.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
+
 }

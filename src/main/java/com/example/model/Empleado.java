@@ -1,4 +1,4 @@
-package model;
+package com.example.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -24,7 +24,7 @@ public class Empleado{
     @NotNull
     @Size(max = 100)
     @Column(name = "apellido_empleado")
-    private String apelidos;
+    private String apellidos;
     @NotNull
     @Size(max = 50)
     @Column(name = "celular_empleado")
@@ -61,10 +61,10 @@ public class Empleado{
 
     }
 
-    public Empleado(Integer cedulaEmpleado, String nombre, String apelidos, Integer celular, String email, String direccionResidencia, String ciudad, Integer antiguedadEmpresa, String tipoSangre) {
+    public Empleado(Integer cedulaEmpleado, String nombre, String apellidos, Integer celular, String email, String direccionResidencia, String ciudad, Integer antiguedadEmpresa, String tipoSangre) {
         this.cedulaEmpleado = cedulaEmpleado;
         this.nombre = nombre;
-        this.apelidos = apelidos;
+        this.apellidos = apellidos;
         this.celular = celular;
         this.email = email;
         this.direccionResidencia = direccionResidencia;

@@ -1,27 +1,25 @@
-package model;
+package com.example.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
-@Table(name = "estado_envio")
-public class EstadoEnvio {
+@Table(name = "tipo_Empleado")
+public class TipoEmpleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long id;
     @NotNull
-    @Size(max = 50)
-    @Column(name = "nombre_estadoPaquete")
+    @Size(max = 100)
     private String nombre;
 
-    public EstadoEnvio() {
-    }
 
-    public EstadoEnvio(String nombre) {
-        this.nombre = nombre;
-    }
-
+    @OneToMany(mappedBy="tipoEmpleado")
+    private List<Empleado> empleados;
 }

@@ -1,4 +1,4 @@
-package model;
+package com.example.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -62,13 +62,13 @@ public class Envio {
     @JoinColumn(name="cedulaEmpleado")
     private Empleado empleado;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "idEstadoEnvio")
     private EstadoEnvio estado;
 
     @ManyToOne
     @JoinColumn(name = "idPaquete")
-    private Paquete paquete;
+    private Paquete paquete;*/
 
     public Envio() {
     }

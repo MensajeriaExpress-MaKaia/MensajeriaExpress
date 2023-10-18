@@ -1,18 +1,20 @@
-package controller;
+package com.example.controller;
 
-import model.Empleado;
+import com.example.model.Empleado;
+import com.example.service.EmployableService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import service.EmpleadoService;
 
 @RestController
 @RequestMapping("/empleados")
 public class EmpleadoController {
 
-    private final EmpleadoService empleadoService;
+    private final EmployableService empleadoService;
 
     @Autowired
-    public EmpleadoController(EmpleadoService empleadoService) {
+    public EmpleadoController(EmployableService empleadoService) {
         this.empleadoService = empleadoService;
     }
     @GetMapping
@@ -20,11 +22,19 @@ public class EmpleadoController {
         return (Empleado) empleadoService.getAllEmpleados();
     }
     @GetMapping("/{id}")
-    public Empleado getEmpleadoById(@PathVariable Integer id){
-        return empleadoService.getEmpleadoById(id);
+    public Empleado findEmpleadoById(@PathVariable  Integer id){
+        if(id == null) {
+            throw new RuntimeException("El id del empleado es requerido");
+        }
+        Empleado empleado = empleadoService.findEmpleadoById(id);
+        if (empleado == null){
+            throw new RuntimeException("No existe empleado con id "+ id);
+        }
+        return empleado;
     }
     @PostMapping
-    public Empleado addEmpleado(@RequestBody Empleado empleado){
+    @ResponseStatus(HttpStatus.CREATED)
+    public Empleado addEmpleado(@Valid @RequestBody Empleado empleado){
         return empleadoService.addEmpleado(empleado);
     }
     @PutMapping("/{id}")
